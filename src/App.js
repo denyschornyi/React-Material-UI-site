@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu' ;
+import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid, Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import LayerIcon from '@material-ui/icons/Layers';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import { makeStyles } from '@material-ui/core/styles' ;
 
 
@@ -35,10 +37,23 @@ const useStyles = makeStyles((theme) => ({
   },
   mainFeaturesPostContent: {
     position: "relative",
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(6),
     padding: theme.spacing(8),
+  },
+
+
+  cardMedia: {
+    paddingTop: "56.25%"
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  cardGrid: {
+    marginTop: theme.spacing(4)
   }
 }))
+
+const cards = [1,2,3,4,5,6];
 
 function App() {
   const classes = useStyles();
@@ -81,6 +96,61 @@ function App() {
             </Grid>
           </Container>
       </Paper>
+
+
+      <div className={classes.mainContent}>
+        <Container maxWidth="md">
+          <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+            Landing Page using React + Material UI
+          </Typography>
+          <Typography variant="h5" align="justify" color="textSecondary" paragraph>
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae praesentium nam non saepe neque recusandae dolore ab odio, mollitia autem nemo deserunt similique quisquam minus repellendus assumenda et itaque. Atque.
+          </Typography>
+          <div className={classes.mainButtons}>
+            <Grid container spacing={2} justify="center">
+              <Grid item>
+                <Button variant="contained" color="primary">Start Now</Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" color="primary">Learn more</Button>
+              </Grid>
+            </Grid>
+          </div>
+        </Container>
+      </div>
+
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {cards.map(card => {
+            return (
+              <Grid item key={card} xs={12} sm={6} md={4} >
+                <Card className={classes.card}>
+                  <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="image title"/>
+                  <CardContent className={classes.cardContent}>
+                    <Typography variant="h5" gutterBottom>
+                      Blog post
+                    </Typography>
+                    <Typography>
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, itaque.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+
+                    <LayerIcon/>
+                    <PlayCircleFilledIcon/>
+                  </CardActions>
+                </Card>
+              </Grid>
+            )
+          })}
+        </Grid>
+      </Container>
     </main>
     </>
   );
