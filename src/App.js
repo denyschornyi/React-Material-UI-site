@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid, Card, CardMedia, CardContent, CardActions, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid, Card, CardMedia, CardContent, CardActions, BottomNavigation, BottomNavigationAction, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import LayerIcon from '@material-ui/icons/Layers';
@@ -69,6 +69,17 @@ function App() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleModal = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
   }
 
   return (
@@ -81,7 +92,23 @@ function App() {
           </IconButton>
           <Typography variant="h6" className={classes.title}> React Material UI</Typography>
           <Box mr={3}>
-            <Button color="inherit" variant="outlined" >Log In</Button>
+            <Button color="inherit" variant="outlined" onClick={handleModal}>Log In</Button>
+
+            <Dialog open={open} onClose={handleClose} aria-labeledby="form-dialog-title">
+              <DialogTitle id="form-dialog-title">Log In</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Log in to see All blog posts
+                </DialogContentText>
+                <TextField autoFocus margin="dense" id="name" label="Email Adress" type="email" fullWidth/>
+                <TextField autoFocus margin="dense" id="pass" label="Password" type="password" fullWidth/>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">Cancel</Button>
+                <Button onClick={handleClose} color="primary">Log In</Button>
+              </DialogActions>
+            </Dialog>
+
           </Box>
           <Button color="secondary" variant="contained">Sign Up</Button>
         </Toolbar>
