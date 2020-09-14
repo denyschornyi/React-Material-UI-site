@@ -1,9 +1,16 @@
 import React from 'react';
 import './App.css';
-import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid, Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
+
+import {AppBar, Container, Toolbar, IconButton, Typography, Box, Button, Paper, Grid, Card, CardMedia, CardContent, CardActions, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import LayerIcon from '@material-ui/icons/Layers';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FolderIcon from '@material-ui/icons/Folder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
 import { makeStyles } from '@material-ui/core/styles' ;
 
 
@@ -56,7 +63,14 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1,2,3,4,5,6];
 
 function App() {
+
   const classes = useStyles();
+  const [value, setValue] = React.useState("recents");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+
   return (
     <>
       <AppBar position="fixed">
@@ -152,6 +166,23 @@ function App() {
         </Grid>
       </Container>
     </main>
+
+    
+
+    <footer>
+      <Typography variant="h6" align="center" gutterBottom>
+        Footer
+      </Typography>
+      <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+          <BottomNavigationAction  label="Recents" value="recents" icon={<RestoreIcon/>}/>
+          <BottomNavigationAction  label="Favorites" value="favorites" icon={<FavoriteIcon/>}/>
+          <BottomNavigationAction  label="Nearby" value="nearby" icon={<LocationOnIcon/>}/>
+          <BottomNavigationAction  label="Folder" value="folder" icon={<FolderIcon/>}/>
+      </BottomNavigation>
+      <Typography align="center" color="textSecondary" paragraph >
+        Landing page using React.js + Material UI
+      </Typography>
+    </footer>
     </>
   );
 }
