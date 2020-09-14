@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
   mainFeaturesPostContent: {
     position: "relative",
-    padding: theme.spacing(10),
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(8),
   }
 }))
 
